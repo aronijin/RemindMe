@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ListView
-       xmlns:android="http://schemas.android.com/apk/res/android"
-       android:id="@+id/listview1"
-       android:layout_width="fill_parent"
-       android:layout_height="fill_parent"
-       android:layout_above="@+id/add"
-       android:layout_alignParentTop="true"
-       android:orientation="vertical" />
+    <ExpandableListView
+        android:id="@+id/expandable_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/add"
+        android:cacheColorHint="#00000000"
+        android:listSelector="@android:color/transparent"
+        android:transcriptMode="alwaysScroll" />
 
     <ImageButton
         android:id="@+id/add"
@@ -20,5 +20,7 @@
         android:layout_centerHorizontal="true"
         android:onClick="addFoddStuff"
         android:src="@android:drawable/ic_input_add" />
+
+    
 
 </RelativeLayout>

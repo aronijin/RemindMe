@@ -67,6 +67,26 @@ public class FoodStuff {
 		return id;
 	}
 	
+	public String ifExpired() {
+		
+		String expired = "";
+		
+		if(expire_date <= Calendar.getInstance().getTimeInMillis()){
+			expired = "[EXPIRED]";
+		}
+		return expired;
+	}
+	
+	public boolean isExpired() {
+		
+		boolean expired = false;
+		
+		if(expire_date <= Calendar.getInstance().getTimeInMillis()){
+			expired = true;
+		}
+		return expired;
+	}
+	
 	public String toString(){
 		Calendar c = Calendar.getInstance();
 		c.setTimeInMillis(expire_date);
