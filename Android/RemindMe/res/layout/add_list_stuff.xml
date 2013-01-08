@@ -4,22 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <EditText
         android:id="@+id/nameLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Name:   "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_toRightOf="@+id/nameText"
+        android:ems="10" >
+
+    </EditText>
 
     <TextView
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/nameLabel"
-        android:text="Medium Text"
+        android:layout_alignBottom="@+id/nameLabel"
+        android:layout_alignParentLeft="true"
+        android:text="Name of Food:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -27,89 +28,91 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nameLabel"
-        android:text="Description:   "
+        android:layout_below="@+id/nameText"
+        android:text="Food Description:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
+    <EditText
         android:id="@+id/descrText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/descrLabel"
-        android:layout_alignBottom="@+id/descrLabel"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/nameLabel"
         android:layout_toRightOf="@+id/descrLabel"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
     <TextView
-        android:id="@+id/addedLabel"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/descrLabel"
-        android:text="Date Added:   "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/addedText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/descrText"
-        android:layout_centerHorizontal="true"
-        android:text="Medium Text"
+        android:text="Added Date:  "
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/expireLabel"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/addedLabel"
+        android:layout_below="@+id/textView1"
         android:text="Expiration Date:   "
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/expireText"
+        android:id="@+id/expireDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addedText"
-        android:layout_toRightOf="@+id/expireLabel"
-        android:text="Medium Text"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_toRightOf="@+id/textView3"
+        android:text="expire"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    <ImageView
-        android:id="@+id/imageView1"
+
+    <TextView
+        android:id="@+id/addedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" />
+        android:layout_above="@+id/textView3"
+        android:layout_toRightOf="@+id/descrLabel"
+        android:text="added"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ImageButton
+    <Button
         android:id="@+id/button1"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/expireLabel"
-        android:onClick="viewImage"
-        android:src="@android:drawable/ic_menu_camera" />
+        android:layout_below="@+id/textView3"
+        android:onClick="changeAdd"
+        android:text="Change Added Date" />
 
-    <ImageButton
+    <Button
         android:id="@+id/button2"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/button1"
+        android:layout_toRightOf="@+id/button1"
+        android:onClick="changeExpire"
+        android:text="Change Expire Date" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:onClick="deleteItem"
-        android:src="@android:drawable/ic_delete" />
+        android:layout_below="@+id/button3" />
 
     <ImageButton
         android:id="@+id/imageButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button2"
-        android:onClick="goBack"
-        android:src="@android:drawable/ic_menu_revert" />
+        android:layout_alignParentLeft="true"
+        android:onClick="saveList"
+        android:src="@android:drawable/ic_menu_save" />
 
 </RelativeLayout>

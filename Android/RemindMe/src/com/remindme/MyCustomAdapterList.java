@@ -8,13 +8,13 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-public class MyCustomAdapter extends BaseExpandableListAdapter {
+public class MyCustomAdapterList extends BaseExpandableListAdapter {
 
 	private LayoutInflater inflater;
-	private ArrayList<Parent> mParent;
+	private ArrayList<ListParent> mParent;
 	private long pos;
 
-	public MyCustomAdapter(Context context, ArrayList<Parent> parent) {
+	public MyCustomAdapterList(Context context, ArrayList<ListParent> parent) {
 		mParent = parent;
 		inflater = LayoutInflater.from(context);
 	}
@@ -66,16 +66,12 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
 
 		if (view == null) {
 			
-			view = inflater
-					.inflate(R.layout.list_item_parent, viewGroup, false);
+			view = inflater.inflate(R.layout.list_fragment_item, viewGroup, false);
 		}
 
-		TextView textView = (TextView) view
-				.findViewById(R.id.list_item_text_view);
-		// "i" is the position of the parent/group in the list
-		textView.setText(getGroup(i).toString());
-
-		// return the entire view
+		TextView textView = (TextView) view.findViewById(R.id.list_item_view);
+		textView.setText(mParent.get(i).getTitle());
+		
 		return view;
 	}
 
@@ -84,18 +80,16 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int i, int i1, boolean b, View view,
 			ViewGroup viewGroup) {
 		if (view == null) {
-			view = inflater.inflate(R.layout.list_item_child, viewGroup, false);
+			view = inflater.inflate(R.layout.list_fragment_child, viewGroup, false);
 		}
 
 		TextView textView = (TextView) view
-				.findViewById(R.id.list_item_text_child);
-		TextView added_date = (TextView) view
-				.findViewById(R.id.list_item_text_child_date);
+				.findViewById(R.id.list_item_child);
 		// "i" is the position of the parent/group in the list and
 		// "i1" is the position of the child
-
-		textView.setText(mParent.get(i).getChild());
-		added_date.setText(mParent.get(i).getAdded_date());
+		if (mParent.get(i).getChild() == null) {
+			textView.setText(mParent.get(i).getChild().get(i1));
+		}
 		// return the entire view
 		return view;
 	}

@@ -30,6 +30,8 @@ public class FoodFragment extends ListFragment {
 	protected ArrayList<Parent> arrayParents;
 	private ExpandableListView mExpandableList;
 
+	protected boolean visable;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -193,5 +195,13 @@ public class FoodFragment extends ListFragment {
 
 	public String getPath() {
 		return fs.getPath();
+	}
+	
+	public void setVisable(boolean vis) {
+		this.visable = vis;
+	}
+	
+	public boolean getVisable() {
+		return this.visable;
 	}
 }

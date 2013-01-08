@@ -1,7 +1,5 @@
 package com.remindme;
 
-import java.util.ArrayList;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -10,33 +8,26 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.hardware.Camera;
-import android.view.Surface;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	protected static final String PHOTO_TAKEN = "photo_taken";
+
+	// Databases
 	private dbhandler datasource;
-	protected ImageView _image;
-	protected TextView _field;
-	protected String path;
-	protected boolean _taken;
-	protected ListView list;
-	protected FoodStuff fs;
-	protected ArrayList<Parent> arrayParents;
-	protected FoodFragment ff;
-	protected ListFragment lf;
+	private dbhandlerList datasourceList;
+	
+	private ActionBar actionBar;
+	
+	protected FoodFragment ff; // Reference to the food side fragment
+	protected ListFragment lf; // Reference to the list side fragment
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start);
 
-		ActionBar actionBar = getActionBar();
-
+		// Set action bar
+		actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		ff = new FoodFragment();
@@ -59,13 +50,28 @@ public class MainActivity extends Activity {
 		datasource.open();
 		datasource.close();
 
+		datasourceList = new dbhandlerList(this);
+		datasourceList.open();
+		datasourceList.close();
+	
+		// Set the current fragment that is visable
+		ff.setVisable(true);
+		lf.setVisable(false);
+
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		ff.setDatabaseListView();
-		// setDatabaseListView();
+		
+		// Determine which fragment is currently selected
+		if (lf.getVisable()) {
+			lf.setDatabaseListView();
+		}
+		if (ff.getVisable()) {
+			ff.setDatabaseListView();
+		}
+	
 	}
 
 	/*
@@ -76,11 +82,13 @@ public class MainActivity extends Activity {
 		startActivity(myIntent);
 	}
 
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu) {
-	// getMenuInflater().inflate(R.menu.activity_main, menu);
-	// return true;
-	// }
+	/*
+	 * Used to add new list item to database
+	 */
+	public void addListStuff(View view) {
+		Intent myIntent = new Intent(getBaseContext(), AddListStuff.class);
+		startActivity(myIntent);
+	}
 
 	public void deleteItem(View view) {
 		ff.deleteItem(view);
@@ -96,7 +104,7 @@ public class MainActivity extends Activity {
 		intent.setDataAndType(Uri.parse("file://" + ff.getPath()), "image/*");
 		startActivity(intent);
 	}
-	
+
 }
 
 class TabListener implements ActionBar.TabListener {
@@ -109,12 +117,14 @@ class TabListener implements ActionBar.TabListener {
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// ft.attach(mFragment);
-		ft.replace(R.id.fragment_container, mFragment);
+		((ListFragment) mFragment).setVisable(true);
+		ft.replace(R.id.fragment_container, mFragment, "" + tab.getText());
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 		// ft.detach(mFragment);
+		((ListFragment) mFragment).setVisable(false);
 		ft.remove(mFragment);
 	}
 

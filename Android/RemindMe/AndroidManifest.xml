@@ -34,8 +34,8 @@
             android:theme="@android:style/Theme.Holo" >
         </activity>
         <activity
-            android:name=".ViewFood"
-            android:label="View Food Item Details"
+            android:name=".AddListStuff"
+            android:label="Add New List"
             android:theme="@android:style/Theme.Holo" >
         </activity>
         <activity
