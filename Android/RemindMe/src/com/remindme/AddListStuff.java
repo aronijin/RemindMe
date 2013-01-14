@@ -1,6 +1,8 @@
 package com.remindme;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -38,7 +40,6 @@ public class AddListStuff extends Activity {
     
     public void saveList(View view){
     	TextView name = (TextView) findViewById(R.id.nameLabel);
-    	TextView descr = (TextView) findViewById(R.id.descrText);
     	Calendar add = Calendar.getInstance(), expire = Calendar.getInstance();
     	add.set(aYear, aMonth, aDay);
     	expire.set(eYear, eMonth, eDay);
@@ -51,8 +52,9 @@ public class AddListStuff extends Activity {
 	    
 	    setNotification(calendar);
 	    
+	    List<ListItem> children = new ArrayList<ListItem>();
     	datasource.open();
-    	ListFood fs = new ListFood(name.getText().toString(), descr.getText().toString(), add.getTimeInMillis(), expire.getTimeInMillis(), 0);
+    	ListFood fs = new ListFood(name.getText().toString(), "Nothing", add.getTimeInMillis(), expire.getTimeInMillis(), 0, children);
     	datasource.addList(fs);
     	datasource.close();
     	

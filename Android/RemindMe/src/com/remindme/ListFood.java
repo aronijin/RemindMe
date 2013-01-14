@@ -1,20 +1,24 @@
 package com.remindme;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class ListFood {
 	private long id;
+	private List<ListItem> children;
 	private String name;
 	private String description;
 	private int type;
 	private long expire_date, added_date;
 
-	public ListFood(String name, String descr, long expire, long added, int t) {
+	public ListFood(String name, String descr, long expire, long added, int t, List<ListItem> child) {
 		this.name = name;
 		this.description = descr;
 		this.expire_date = expire;
 		this.added_date = added;
 		this.type = t;
+		this.children = child;
 	}
 
 	public ListFood() {
@@ -85,5 +89,13 @@ public class ListFood {
 
 	public String toString() {
 		return this.name;
+	}
+
+	public List<ListItem> getChildren() {
+		return this.children;
+	}
+
+	public void setChildren(List<ListItem> children) {
+		this.children = children;
 	}
 }

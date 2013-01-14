@@ -5,10 +5,17 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -17,6 +24,7 @@ public class MainActivity extends Activity {
 	private dbhandlerList datasourceList;
 	
 	private ActionBar actionBar;
+	protected Dialog dialog;
 	
 	protected FoodFragment ff; // Reference to the food side fragment
 	protected ListFragment lf; // Reference to the list side fragment
@@ -92,6 +100,42 @@ public class MainActivity extends Activity {
 
 	public void deleteItem(View view) {
 		ff.deleteItem(view);
+	}
+	
+	public void showListItem(View view) {
+		dialog = new Dialog(MainActivity.this);
+		dialog.setContentView(R.layout.pop_up);
+		dialog.setTitle("Add new list!");
+		dialog.setCancelable(true);
+		ImageButton cancel = (ImageButton) dialog.findViewById(R.id.btnCancel);
+        cancel.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+            	dialog.dismiss();
+            }
+        });
+        ImageButton add = (ImageButton) dialog.findViewById(R.id.btnAdd);
+        add.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+            	TextView child = (TextView) dialog.findViewById(R.id.input);
+            	System.out.println("Input: " + child.getText());
+            	lf.addListItem("" + child.getText());
+            	dialog.dismiss();
+            }
+        });
+        
+		dialog.show();
+	}
+	
+	public void deleteList(View view) {
+		lf.deleteItem(view);
+	}
+	
+	public void deleteListItem(View view) {
+		// PROBLEM HERE!!!!!!!!!!!!!
+		System.out.println("View ID: " + view.getId());
+//		lf.deleteItem();
 	}
 
 	/*

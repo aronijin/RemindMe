@@ -30,7 +30,7 @@ public class MyCustomAdapterList extends BaseExpandableListAdapter {
 	// counts the number of children items so the list knows how many times
 	// calls getChildView() method
 	public int getChildrenCount(int i) {
-		return 1;
+		return mParent.get(i).getChildCount();
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class MyCustomAdapterList extends BaseExpandableListAdapter {
 	@Override
 	// gets the name of each item
 	public Object getChild(int i, int i1) {
-		return mParent.get(i).getChild();
+		return mParent.get(i).getChildren().get(i1).getTitle();
 	}
 
 	@Override
@@ -65,13 +65,14 @@ public class MyCustomAdapterList extends BaseExpandableListAdapter {
 	public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
 
 		if (view == null) {
-			
-			view = inflater.inflate(R.layout.list_fragment_item, viewGroup, false);
+
+			view = inflater.inflate(R.layout.list_fragment_item, viewGroup,
+					false);
 		}
 
 		TextView textView = (TextView) view.findViewById(R.id.list_item_view);
 		textView.setText(mParent.get(i).getTitle());
-		
+
 		return view;
 	}
 
@@ -79,18 +80,37 @@ public class MyCustomAdapterList extends BaseExpandableListAdapter {
 	// in this method you must set the text to see the children on the list
 	public View getChildView(int i, int i1, boolean b, View view,
 			ViewGroup viewGroup) {
-		if (view == null) {
-			view = inflater.inflate(R.layout.list_fragment_child, viewGroup, false);
+
+		if (i1 == 0) {
+			view = inflater.inflate(R.layout.add_list_item, viewGroup, false);
+
+			TextView textView = (TextView) view
+					.findViewById(R.id.list_end_child);
+			textView.setText(""
+					+ mParent.get(i).getChildren().get(i1).getTitle());
+			// return the entire view
+
+		} else {
+			view = inflater.inflate(R.layout.list_fragment_child, viewGroup,
+					false);
+
+			TextView textView = (TextView) view
+					.findViewById(R.id.list_item_child);
+			// "i" is the position of the parent/group in the list and
+			// "i1" is the position of the child
+			textView.setText(""
+					+ mParent.get(i).getChildren().get(i1).getTitle());
+			//
+			// TextView idView = (TextView) view
+			// .findViewById(R.id.hiddenID);
+			// idView.setText("" +
+			// mParent.get(i).getChildren().get(i1).getId());
+			// idView.setVisibility(View.GONE);
+
+			// return the entire view
+
 		}
 
-		TextView textView = (TextView) view
-				.findViewById(R.id.list_item_child);
-		// "i" is the position of the parent/group in the list and
-		// "i1" is the position of the child
-		if (mParent.get(i).getChild() == null) {
-			textView.setText(mParent.get(i).getChild().get(i1));
-		}
-		// return the entire view
 		return view;
 	}
 
@@ -106,5 +126,5 @@ public class MyCustomAdapterList extends BaseExpandableListAdapter {
 	public void setPos(long pos) {
 		this.pos = pos;
 	}
-	
+
 }

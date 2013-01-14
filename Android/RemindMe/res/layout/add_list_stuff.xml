@@ -20,34 +20,15 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/nameLabel"
         android:layout_alignParentLeft="true"
-        android:text="Name of Food:"
+        android:text="Name of List:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/descrLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nameText"
-        android:text="Food Description:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/descrText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/nameLabel"
-        android:layout_toRightOf="@+id/descrLabel"
-        android:ems="10"
-        android:inputType="textMultiLine" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/descrText"
+        android:layout_below="@+id/nameLabel"
         android:text="Added Date:  "
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -58,25 +39,6 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView1"
         android:text="Expiration Date:   "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/expireDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"
-        android:text="expire"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/addedDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView3"
-        android:layout_toRightOf="@+id/descrLabel"
-        android:text="added"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
@@ -114,5 +76,23 @@
         android:layout_alignParentLeft="true"
         android:onClick="saveList"
         android:src="@android:drawable/ic_menu_save" />
+
+    <TextView
+        android:id="@+id/addedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/expireDate"
+        android:layout_alignLeft="@+id/button2"
+        android:text="added"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/expireDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignRight="@+id/addedDate"
+        android:text="expire"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

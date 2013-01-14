@@ -1,10 +1,10 @@
 package com.remindme;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ListParent {
 	private String title;
-	private ArrayList<String> children;
+	private List<ListItem> children;
 	private long id;
 
 	public String getTitle() {
@@ -15,19 +15,23 @@ public class ListParent {
 		this.title = mTitle;
 	}
 
-	public ArrayList<String> getChild() {
-		return this.children;
-	}
-
-	public void setChild(ArrayList<String> children) {
-		this.children = children;
-	}
-
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public List<ListItem> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<ListItem> children) {
+		this.children = children;
+	}
+	
+	public int getChildCount() {
+		return children.size();
 	}
 }

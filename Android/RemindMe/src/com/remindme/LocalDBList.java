@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class LocalDBList extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 15;
     public static final String TABLE_NAME = "foodlist";
     public static final String LIST_ID = "_id";
     public static final String COLUMN_NAME = "name";
@@ -24,7 +24,7 @@ public class LocalDBList extends SQLiteOpenHelper {
                 COLUMN_ADDED + " INTEGER," + 
                 LIST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE" +
                 ");";
-	private static final String DATABASE_NAME = "localdataList";
+	private static final String DATABASE_NAME = "localdatabase2";
 
     LocalDBList(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

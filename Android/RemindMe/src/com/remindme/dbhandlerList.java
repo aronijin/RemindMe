@@ -59,10 +59,14 @@ public class dbhandlerList {
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
+			
+			// Add logic to get all items in a list
+			
 			ListFood fs = cursorToDataPoint(cursor);
 			dps.add(fs);
 			cursor.moveToNext();
 		}
+		
 		// Make sure to close the cursor
 		cursor.close();
 		return dps;
@@ -72,9 +76,10 @@ public class dbhandlerList {
 		ListFood fs = new ListFood();
 		fs.setName(cursor.getString(0));
 		fs.setDescr(cursor.getString(1));
-	    fs.setType(cursor.getInt(3));
+	    fs.setType(cursor.getInt(5));
 	    fs.setExpire(cursor.getLong(2));
-	    fs.setAddedDate(cursor.getLong(4));
+	    fs.setID(cursor.getLong(4));
+	    fs.setAddedDate(cursor.getLong(3));
 		return fs;
 	}
 }
