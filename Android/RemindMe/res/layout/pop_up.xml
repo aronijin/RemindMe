@@ -12,10 +12,11 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/editText1"
+            android:layout_alignBottom="@+id/input"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Input new item for list: " />
+            android:text="Input Item: "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageButton
             android:id="@+id/btnCancel"
@@ -37,12 +38,10 @@
             android:id="@+id/input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView1"
-            android:ems="10" >
-
-            <requestFocus />
-        </EditText>
+            android:layout_toRightOf="@+id/btnCancel"
+            android:ems="10" />
 
     </RelativeLayout>
 

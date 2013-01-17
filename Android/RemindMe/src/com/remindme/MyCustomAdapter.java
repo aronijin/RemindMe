@@ -65,7 +65,7 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
 	public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
 
 		if (view == null) {
-			
+
 			view = inflater
 					.inflate(R.layout.list_item_parent, viewGroup, false);
 		}
@@ -83,19 +83,34 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
 	// in this method you must set the text to see the children on the list
 	public View getChildView(int i, int i1, boolean b, View view,
 			ViewGroup viewGroup) {
-		if (view == null) {
+		if (mParent.get(i).isExpired()) {
+			view = inflater.inflate(R.layout.expired_item, viewGroup, false);
+
+			TextView textView = (TextView) view
+					.findViewById(R.id.list_item_text_child);
+			TextView added_date = (TextView) view
+					.findViewById(R.id.list_item_text_child_date);
+			// "i" is the position of the parent/group in the list and
+			// "i1" is the position of the child
+
+			textView.setText(mParent.get(i).getChild());
+			added_date.setText(mParent.get(i).getAdded_date());
+			
+		} else {
+
 			view = inflater.inflate(R.layout.list_item_child, viewGroup, false);
+
+			TextView textView = (TextView) view
+					.findViewById(R.id.list_item_text_child);
+			TextView added_date = (TextView) view
+					.findViewById(R.id.list_item_text_child_date);
+			// "i" is the position of the parent/group in the list and
+			// "i1" is the position of the child
+
+			textView.setText(mParent.get(i).getChild());
+			added_date.setText(mParent.get(i).getAdded_date());
 		}
 
-		TextView textView = (TextView) view
-				.findViewById(R.id.list_item_text_child);
-		TextView added_date = (TextView) view
-				.findViewById(R.id.list_item_text_child_date);
-		// "i" is the position of the parent/group in the list and
-		// "i1" is the position of the child
-
-		textView.setText(mParent.get(i).getChild());
-		added_date.setText(mParent.get(i).getAdded_date());
 		// return the entire view
 		return view;
 	}
@@ -112,5 +127,5 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
 	public void setPos(long pos) {
 		this.pos = pos;
 	}
-	
+
 }

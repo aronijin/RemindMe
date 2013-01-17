@@ -132,10 +132,9 @@ public class MainActivity extends Activity {
 		lf.deleteItem(view);
 	}
 	
-	public void deleteListItem(View view) {
-		// PROBLEM HERE!!!!!!!!!!!!!
+	public void refreshItem(View view) {
 		System.out.println("View ID: " + view.getId());
-//		lf.deleteItem();
+		ff.refreshItem();
 	}
 
 	/*

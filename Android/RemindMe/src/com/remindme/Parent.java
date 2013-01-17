@@ -5,6 +5,7 @@ public class Parent {
 	private String added_date;
 	private String children;
 	private long id;
+	private boolean expired;
 
 	public String getTitle() {
 		return title;
@@ -36,5 +37,13 @@ public class Parent {
 
 	public void setAdded_date(String added_date) {
 		this.added_date = added_date;
+	}
+
+	public boolean isExpired() {
+		return expired;
+	}
+
+	public void setExpired(boolean expired) {
+		this.expired = expired;
 	}
 }

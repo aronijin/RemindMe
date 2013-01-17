@@ -1,17 +1,21 @@
 package com.remindme;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,6 +33,7 @@ public class FoodFragment extends ListFragment {
 	protected FoodStuff fs;
 	protected ArrayList<Parent> arrayParents;
 	private ExpandableListView mExpandableList;
+	private int eYear, eMonth, eDay;
 
 	protected boolean visable;
 	
@@ -137,6 +142,9 @@ public class FoodFragment extends ListFragment {
 			} else {
 				parent.setAdded_date("Expires: " + expired_date);
 			}
+			
+			parent.setExpired(dblist.get(i).isExpired());
+			
 			arrayParents.add(parent);
 		}
 
@@ -204,4 +212,48 @@ public class FoodFragment extends ListFragment {
 	public boolean getVisable() {
 		return this.visable;
 	}
+	
+	public void refreshItem() {
+		
+		Calendar cal = Calendar.getInstance();
+    	eYear = cal.get(Calendar.YEAR);
+    	eMonth = cal.get(Calendar.MONTH);
+    	eDay = cal.get(Calendar.DAY_OF_MONTH);
+		DatePickerDialog dlog1 = new DatePickerDialog(getActivity(),
+                mDateSetListener,
+                eYear, eMonth, eDay);
+    	dlog1.setTitle("Set new experation date: ");
+    	dlog1.show();
+	}
+	
+	private DatePickerDialog.OnDateSetListener mDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+
+				@Override
+				public void onDateSet(DatePicker view, int year,
+						int monthOfYear, int dayOfMonth) {
+					eYear = year;
+                    eMonth = monthOfYear;
+                    eDay = dayOfMonth;
+                    resetExperation();
+				}
+            };
+            
+    public void resetExperation() {
+        Calendar expire = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
+    	expire.set(eYear, eMonth, eDay);
+    	
+    	fs.setAdded(cal.getTimeInMillis());
+        fs.setExpire(expire.getTimeInMillis());
+        
+        // Re-add to database
+        datasource.open();
+        datasource.deleteFoodStuff(fs);
+        datasource.addFoodStuff(fs);
+        datasource.close();
+        // Refresh
+        setDatabaseListView();
+    }
+            
 }
